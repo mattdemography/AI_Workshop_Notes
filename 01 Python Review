@@ -1,0 +1,328 @@
+Python Crash Course
+Reference:
+https://www.tutorialspoint.com/python/
+
+1. The syntax of the if...else statement is
+if expression: statement(s) else: statement(s)
+
+
+value = True
+if value:
+   print("Got a true expression value ",value)
+else:
+   print("Got a false expression value ",value)
+Got a true expression value  True
+2. The syntax of the elif Statement
+if expression1: statement(s) elif expression2: statement(s) elif expression3: statement(s) else: statement(s)
+
+
+value = 150
+if value == 200:
+   print("value is 200")
+elif value == 150:
+   print ("value is 150")
+elif value == 100:
+   print ("value is 100")
+else:
+   print ("value is not (100,150,200)")
+print("End!")
+value is 150
+End!
+3. The syntax of the for Statement
+for iterating_var in sequence: statements(s)
+
+
+for letter in "Python":
+   print (letter)
+P
+y
+t
+h
+o
+n
+
+fruits = ["banana", "apple",  "mango"]
+for fruit in fruits:        
+   print (fruit)
+banana
+apple
+mango
+
+fruits = ['banana', 'apple',  'mango']
+for index in range(len(fruits)):
+   print(fruits[index])
+banana
+apple
+mango
+4. The syntax of the while Statement
+while expression: statement(s)
+
+
+count = 0
+while (count < 9):
+   print('The count is:', count)
+   count = count + 1
+The count is: 0
+The count is: 1
+The count is: 2
+The count is: 3
+The count is: 4
+The count is: 5
+The count is: 6
+The count is: 7
+The count is: 8
+5. Python Lists
+The most basic data structure in Python is the sequence. Each element of a sequence is assigned a number - its position or index. The first index is zero, the second index is one, and so forth.
+
+An ordered group of items
+Does not need to be the same type
+Could put numbers, strings or objects in the same list
+List notation
+A = [1,”This is a list”, c, Donkey(“kong”)]
+
+list1 = ['physics', 'chemistry', 1997, 2000];
+list2 = [1, 2, 3, 4, 5 ];
+list3 = ["a", "b", "c", "d"]
+
+for x in list1:
+    for y in list2:
+        print(x, y)
+physics 1
+physics 2
+physics 3
+physics 4
+physics 5
+chemistry 1
+chemistry 2
+chemistry 3
+chemistry 4
+chemistry 5
+1997 1
+1997 2
+1997 3
+1997 4
+1997 5
+2000 1
+2000 2
+2000 3
+2000 4
+2000 5
+Accessing Values in Lists
+
+list1 = ['physics', 'chemistry', 1997, 2000];
+list2 = [0, 1, 2, 3, 4, 5, 6 ];
+print("list1[1]: ", list1[1])
+print("list2[1:3]: ", list2[1:3])
+del list1[2] #Delete element in a list
+print (list1[0:3])
+list1[2]=2001 #Change element in a list
+print (list1[0:3])
+list1[1]:  chemistry
+list2[1:3]:  [1, 2]
+['physics', 'chemistry', 2000]
+['physics', 'chemistry', 2001]
+Updating Lists
+
+list = ['physics', 'chemistry', 1997, 2000];
+print("Value available at index 2 : ", list[2])
+list[2] = 2001;
+print("New value available at index 2 : ", list[2])
+Value available at index 2 :  1997
+New value available at index 2 :  2001
+Delete List Elements
+
+list = ['physics', 'math', 1997, 2000];
+print(list)
+del list[2]
+print("After deleting value at index 2 : ")
+print (list)
+['physics', 'chemistry', 1997, 2000]
+After deleting value at index 2 : 
+['physics', 'chemistry', 2000]
+Basic List Operations
+Lists respond to the + and * operators much like strings;
+
+
+list = ['physics', 'math', 1997, 2000];
+print (len(list))
+list = list + ["AI", 2018]
+print (list)
+print (list*2)
+4
+['physics', 'math', 1997, 2000, 'AI', 2018]
+['physics', 'math', 1997, 2000, 'AI', 2018, 'physics', 'math', 1997, 2000, 'AI', 2018]
+6. Tuples
+A tuple is a sequence of immutable Python objects. Tuples are sequences, just like lists. The differences between tuples and lists are, the tuples cannot be changed unlike lists and tuples use parentheses, whereas lists use square brackets.
+
+
+tup1 = ('physics', 'chemistry', 1997, 2000)
+tup2 = (1, 2, 3, 4, 5 )
+tup3 = "a", "b", "c", "d"
+print(type(tup3))
+<class 'tuple'>
+Accessing Values in Tuples
+
+tup1 = ('physics', 'chemistry', 1997, 2000)
+print (len(tup1))
+tup2 = (1, 2, 3, 4, 5, 6, 7 )
+print ("tup1[0]: ", tup1[0])
+print ("tup2[1:5]: ", tup2[1:5])
+4
+tup1[0]:  physics
+tup2[1:5]:  (2, 3, 4, 5)
+Tuples are immutable which means you cannot update or change the values of tuple elements.
+
+tup1[0] = 100
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-84-034a7a67b47e> in <module>()
+----> 1 tup1[0] = 100
+
+TypeError: 'tuple' object does not support item assignment
+
+7.0 Python Set
+A Set is an unordered collection data type that is iterable, mutable, and has no duplicate elements.
+
+
+normal_set = set([1, "b","c"])
+print(normal_set)
+{'c', 1, 'b'}
+
+normal_set.add("d")
+print(normal_set)
+{'c', 1, 'b', 'd'}
+
+normal_set.add("d")
+print(normal_set)
+{'c', 1, 'b', 'd'}
+8.0 Python Dictionary
+Each key is separated from its value by a colon (:), the items are separated by commas, and the whole thing is enclosed in curly braces. An empty dictionary without any items is written with just two curly braces, like this: {}.
+
+
+dict = {'Name': 'Zara', 'Age': 7, 'Class': 'First'}
+print("dict['Name']: ", dict['Name'])
+print ("dict['Age']: ", dict['Age'])
+dict['Name']:  Zara
+dict['Age']:  7
+Updating Dictionary
+
+dict = {'Name': 'Zara', 'Age': 7, 'Class': 'First'}
+dict['Age'] = 8; # update existing entry
+dict['School'] = "DPS School"; # Add new entry
+print (dict)
+{'Name': 'Zara', 'Age': 8, 'Class': 'First', 'School': 'DPS School'}
+
+print(dict.keys())
+print(dict.values())
+dict_keys(['Name', 'Age', 'Class', 'School'])
+dict_values(['Zara', 8, 'First', 'DPS School'])
+
+dict.clear()
+print (dict)
+{}
+9. Defining a Function
+def functionname( parameters ): "function_docstring" function_suite return [expression]
+
+
+dict = {'name': 'Zara', 'age': 7, 'class': 'First', 'school': 'DPS School'}
+print (dict)
+print (dict['name'])
+{'name': 'Zara', 'school': 'DPS School', 'age': 7, 'class': 'First'}
+Zara
+
+def printinfo( d ):
+    print("name: ", d['name'])
+    print("class: ", d['class'])
+    print("school: ", d['school'])
+    print("age: ", d['age'])
+    return;
+y=['name: ', 'class: ', 'school: ', 'age: ']
+def printinfo2( d ):
+    z=0
+    for x in list(d.keys()):
+        print(y[z], d[x])
+        z=z+1
+        print (z)
+        return z
+    return
+#printinfo(dict)
+printinfo2(dict)
+name:  Zara
+1
+1
+
+printinfo(dict)
+name:  Zara
+class:  First
+school:  DPS School
+age:  7
+
+def sum( a, b ):
+   # Add both the parameters and return them."
+   total = a + b
+   print ("sum : ", total)
+   return total;
+
+print (sum(4,6))
+sum :  10
+10
+10. Exception
+An exception is an event, which occurs during the execution of a program that disrupts the normal flow of the program's instructions. In general, when a Python script encounters a situation that it cannot cope with, it raises an exception. An exception is a Python object that represents an error.
+
+When a Python script raises an exception, it must either handle the exception immediately otherwise it terminates and quits.
+
+Handling an exception
+If you have some suspicious code that may raise an exception, you can defend your program by placing the suspicious code in a try: block. After the try: block, include an except: statement, followed by a block of code which handles the problem as elegantly as possible.
+
+Syntax
+try: You do your operations here; ...................... except ExceptionI: If there is ExceptionI, then execute this block. except ExceptionII: If there is ExceptionII, then execute this block. ...................... else: If there is no exception then execute this block.
+
+
+try:
+   fh = open("testfile", "w")
+   fh.write("This is my test file for exception handling!!")
+except IOError:
+   print("Error: can\'t find file or read data")
+else:
+   print("Written content in the file successfully")
+   fh.close()
+Written content in the file successfully
+
+try:
+   fh = open("testfile", "r")
+   fh.write("This is my test file for exception handling!!")
+except IOError:
+   print("Error: can\'t find file or read data")
+else:
+   print("Written content in the file successfully")
+Error: can't find file or read data
+11. Classes
+Python has been an object-oriented language since it existed. Because of this, creating and using classes and objects are downright easy.
+
+
+class Employee:
+    empCount = 0
+    def __init__(self, n, s):
+        self.name = n
+        self.salary = s
+        Employee.empCount += 1
+        print("here")
+    def displayCount(self):
+        print ("Total Employee %d" % Employee.empCount)
+    def displayEmployee(self):
+        print ("Name : ", self.name,  ", Salary: ", self.salary)
+
+emp1 = Employee("Zara", 2000)
+emp1.empCount
+emp2 = Employee("Manni", 5000)
+emp1.empCount
+here
+here
+4
+
+emp1.displayCount()
+emp2.displayEmployee()
+Total Employee 4
+Name :  Manni , Salary:  5000
+
+​
