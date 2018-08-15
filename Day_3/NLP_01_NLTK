@@ -1,0 +1,67 @@
+Project Gutenberg
+Digitizes books and literature that are mostly in the pubic domain http://www.gutenberg.org/wiki/Main_Page
+
+
+import nltk
+nltk.download('gutenberg') #Specify corpus we want to download
+nltk.download('punkt')
+/usr/lib/python3.5/importlib/_bootstrap.py:222: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/lib/python3.5/importlib/_bootstrap.py:222: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/lib/python3.5/importlib/_bootstrap.py:222: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+[nltk_data] Downloading package gutenberg to
+[nltk_data]     /home/student/nltk_data...
+[nltk_data]   Unzipping corpora/gutenberg.zip.
+[nltk_data] Downloading package punkt to /home/student/nltk_data...
+[nltk_data]   Unzipping tokenizers/punkt.zip.
+True
+
+nltk.corpus.gutenberg.fileids()
+['austen-emma.txt',
+ 'austen-persuasion.txt',
+ 'austen-sense.txt',
+ 'bible-kjv.txt',
+ 'blake-poems.txt',
+ 'bryant-stories.txt',
+ 'burgess-busterbrown.txt',
+ 'carroll-alice.txt',
+ 'chesterton-ball.txt',
+ 'chesterton-brown.txt',
+ 'chesterton-thursday.txt',
+ 'edgeworth-parents.txt',
+ 'melville-moby_dick.txt',
+ 'milton-paradise.txt',
+ 'shakespeare-caesar.txt',
+ 'shakespeare-hamlet.txt',
+ 'shakespeare-macbeth.txt',
+ 'whitman-leaves.txt']
+
+book = nltk.corpus.gutenberg.words("bible-kjv.txt")
+book_sents = nltk.corpus.gutenberg.sents("bible-kjv.txt") #Sentences
+
+len(book_sents)
+30103
+
+len(book)
+1010654
+
+book.count("poor")
+205
+
+book_set = set(book) #Puts in set give no duplication of words
+
+len(book_set)
+13769
+
+len(book)/len(book_set) #Average repetition of words
+73.40068269300603
+
+len(book)/len(book_sents) #Average number of words in a sentence.
+33.57319868451649
+
+​
+nltk.corpus.reader.util.StreamBackedCorpusView
+
+​
