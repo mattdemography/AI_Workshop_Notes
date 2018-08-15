@@ -1,0 +1,191 @@
+import nltk
+nltk.download('inaugural')
+
+from nltk.corpus import inaugural
+
+inaugural.fileids()
+['1789-Washington.txt',
+ '1793-Washington.txt',
+ '1797-Adams.txt',
+ '1801-Jefferson.txt',
+ '1805-Jefferson.txt',
+ '1809-Madison.txt',
+ '1813-Madison.txt',
+ '1817-Monroe.txt',
+ '1821-Monroe.txt',
+ '1825-Adams.txt',
+ '1829-Jackson.txt',
+ '1833-Jackson.txt',
+ '1837-VanBuren.txt',
+ '1841-Harrison.txt',
+ '1845-Polk.txt',
+ '1849-Taylor.txt',
+ '1853-Pierce.txt',
+ '1857-Buchanan.txt',
+ '1861-Lincoln.txt',
+ '1865-Lincoln.txt',
+ '1869-Grant.txt',
+ '1873-Grant.txt',
+ '1877-Hayes.txt',
+ '1881-Garfield.txt',
+ '1885-Cleveland.txt',
+ '1889-Harrison.txt',
+ '1893-Cleveland.txt',
+ '1897-McKinley.txt',
+ '1901-McKinley.txt',
+ '1905-Roosevelt.txt',
+ '1909-Taft.txt',
+ '1913-Wilson.txt',
+ '1917-Wilson.txt',
+ '1921-Harding.txt',
+ '1925-Coolidge.txt',
+ '1929-Hoover.txt',
+ '1933-Roosevelt.txt',
+ '1937-Roosevelt.txt',
+ '1941-Roosevelt.txt',
+ '1945-Roosevelt.txt',
+ '1949-Truman.txt',
+ '1953-Eisenhower.txt',
+ '1957-Eisenhower.txt',
+ '1961-Kennedy.txt',
+ '1965-Johnson.txt',
+ '1969-Nixon.txt',
+ '1973-Nixon.txt',
+ '1977-Carter.txt',
+ '1981-Reagan.txt',
+ '1985-Reagan.txt',
+ '1989-Bush.txt',
+ '1993-Clinton.txt',
+ '1997-Clinton.txt',
+ '2001-Bush.txt',
+ '2005-Bush.txt',
+ '2009-Obama.txt']
+
+for speech in inaugural.fileids():
+    no_words = len(inaugural.words(speech))
+    print(no_words, speech)
+1538 1789-Washington.txt
+147 1793-Washington.txt
+2585 1797-Adams.txt
+1935 1801-Jefferson.txt
+2384 1805-Jefferson.txt
+1265 1809-Madison.txt
+1304 1813-Madison.txt
+3693 1817-Monroe.txt
+4909 1821-Monroe.txt
+3150 1825-Adams.txt
+1208 1829-Jackson.txt
+1267 1833-Jackson.txt
+4171 1837-VanBuren.txt
+9165 1841-Harrison.txt
+5196 1845-Polk.txt
+1182 1849-Taylor.txt
+3657 1853-Pierce.txt
+3098 1857-Buchanan.txt
+4005 1861-Lincoln.txt
+785 1865-Lincoln.txt
+1239 1869-Grant.txt
+1478 1873-Grant.txt
+2724 1877-Hayes.txt
+3239 1881-Garfield.txt
+1828 1885-Cleveland.txt
+4750 1889-Harrison.txt
+2153 1893-Cleveland.txt
+4371 1897-McKinley.txt
+2450 1901-McKinley.txt
+1091 1905-Roosevelt.txt
+5846 1909-Taft.txt
+1905 1913-Wilson.txt
+1656 1917-Wilson.txt
+3756 1921-Harding.txt
+4442 1925-Coolidge.txt
+3890 1929-Hoover.txt
+2063 1933-Roosevelt.txt
+2019 1937-Roosevelt.txt
+1536 1941-Roosevelt.txt
+637 1945-Roosevelt.txt
+2528 1949-Truman.txt
+2775 1953-Eisenhower.txt
+1917 1957-Eisenhower.txt
+1546 1961-Kennedy.txt
+1715 1965-Johnson.txt
+2425 1969-Nixon.txt
+2028 1973-Nixon.txt
+1380 1977-Carter.txt
+2801 1981-Reagan.txt
+2946 1985-Reagan.txt
+2713 1989-Bush.txt
+1855 1993-Clinton.txt
+2462 1997-Clinton.txt
+1825 2001-Bush.txt
+2376 2005-Bush.txt
+2726 2009-Obama.txt
+
+speech_len = [(len(inaugural.words(speech)), speech) for speech in inaugural.fileids()]
+
+type(speech_len)
+list
+
+print (speech_len)
+[(1538, '1789-Washington.txt'), (147, '1793-Washington.txt'), (2585, '1797-Adams.txt'), (1935, '1801-Jefferson.txt'), (2384, '1805-Jefferson.txt'), (1265, '1809-Madison.txt'), (1304, '1813-Madison.txt'), (3693, '1817-Monroe.txt'), (4909, '1821-Monroe.txt'), (3150, '1825-Adams.txt'), (1208, '1829-Jackson.txt'), (1267, '1833-Jackson.txt'), (4171, '1837-VanBuren.txt'), (9165, '1841-Harrison.txt'), (5196, '1845-Polk.txt'), (1182, '1849-Taylor.txt'), (3657, '1853-Pierce.txt'), (3098, '1857-Buchanan.txt'), (4005, '1861-Lincoln.txt'), (785, '1865-Lincoln.txt'), (1239, '1869-Grant.txt'), (1478, '1873-Grant.txt'), (2724, '1877-Hayes.txt'), (3239, '1881-Garfield.txt'), (1828, '1885-Cleveland.txt'), (4750, '1889-Harrison.txt'), (2153, '1893-Cleveland.txt'), (4371, '1897-McKinley.txt'), (2450, '1901-McKinley.txt'), (1091, '1905-Roosevelt.txt'), (5846, '1909-Taft.txt'), (1905, '1913-Wilson.txt'), (1656, '1917-Wilson.txt'), (3756, '1921-Harding.txt'), (4442, '1925-Coolidge.txt'), (3890, '1929-Hoover.txt'), (2063, '1933-Roosevelt.txt'), (2019, '1937-Roosevelt.txt'), (1536, '1941-Roosevelt.txt'), (637, '1945-Roosevelt.txt'), (2528, '1949-Truman.txt'), (2775, '1953-Eisenhower.txt'), (1917, '1957-Eisenhower.txt'), (1546, '1961-Kennedy.txt'), (1715, '1965-Johnson.txt'), (2425, '1969-Nixon.txt'), (2028, '1973-Nixon.txt'), (1380, '1977-Carter.txt'), (2801, '1981-Reagan.txt'), (2946, '1985-Reagan.txt'), (2713, '1989-Bush.txt'), (1855, '1993-Clinton.txt'), (2462, '1997-Clinton.txt'), (1825, '2001-Bush.txt'), (2376, '2005-Bush.txt'), (2726, '2009-Obama.txt')]
+
+max(speech_len)
+(9165, '1841-Harrison.txt')
+
+min(speech_len)
+(147, '1793-Washington.txt')
+
+import pandas as pd
+/usr/lib/python3.5/importlib/_bootstrap.py:222: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/lib/python3.5/importlib/_bootstrap.py:222: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+
+data = pd.DataFrame([int (speech[:4]), len(inaugural.words(speech))/len(inaugural.sents(speech))] for speech in inaugural.fileids())
+
+data.columns = ["Year", "Avg. WPS"]
+data.head(10)
+Year	Avg. WPS
+0	1789	64.083333
+1	1793	36.750000
+2	1797	69.864865
+3	1801	46.071429
+4	1805	52.977778
+5	1809	60.238095
+6	1813	39.515152
+7	1817	30.270492
+8	1821	38.054264
+9	1825	42.567568
+
+%matplotlib inline
+
+data.plot("Year", "Avg. WPS")
+<matplotlib.axes._subplots.AxesSubplot at 0x7f06385b4be0>
+
+
+unique = [(set(inaugural.words(speech)), speech) for speech in inaugural.fileids()]
+#pd is from Panda Dataframe
+unique_words= pd.DataFrame([int(speech[:4]), len(set(inaugural.words(speech)))] for speech in inaugural.fileids())
+unique_words.columns = ["Year", "Unique Words"]
+unique_words.head(10)
+#for speech in inaugural.fileids():
+#    unique = set(inaugural.words(speech))
+#    print(unique, speech)
+​
+Year	Unique Words
+0	1789	628
+1	1793	96
+2	1797	828
+3	1801	717
+4	1805	806
+5	1809	537
+6	1813	542
+7	1817	1041
+8	1821	1265
+9	1825	1007
+
+unique_words.plot("Year", "Unique Words")
+<matplotlib.axes._subplots.AxesSubplot at 0x7f0634766f98>
+
+
+​
