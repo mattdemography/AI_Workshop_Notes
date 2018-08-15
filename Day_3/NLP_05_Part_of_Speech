@@ -1,0 +1,117 @@
+Part of Speech
+A part of speech tagger will identify the part of speech for a sequence of words.
+
+import nltk
+nltk.download('averaged_perceptron_tagger')
+
+text = "I walked to the cafe to buy coffee before work."
+text = "Fruit flies like a banana"
+
+tokens = nltk.word_tokenize(text)
+
+nltk.pos_tag(tokens) #Parts of Speech
+[('Fruit', 'NNP'),
+ ('flies', 'VBZ'),
+ ('like', 'IN'),
+ ('a', 'DT'),
+ ('banana', 'NN')]
+
+nltk.pos_tag(nltk.word_tokenize("I will have desert."))
+[('I', 'PRP'), ('will', 'MD'), ('have', 'VB'), ('desert', 'NN'), ('.', '.')]
+
+nltk.pos_tag(nltk.word_tokenize("They will desert us."))
+[('They', 'PRP'), ('will', 'MD'), ('desert', 'VB'), ('us', 'PRP'), ('.', '.')]
+Create a list of all nouns in a story
+
+nltk.download('universal_tagset')
+[nltk_data] Downloading package universal_tagset to
+[nltk_data]     /home/student/nltk_data...
+[nltk_data]   Unzipping taggers/universal_tagset.zip.
+True
+
+md = nltk.corpus.gutenberg.words("melville-moby_dick.txt")
+
+len(md)
+260819
+
+lowercase
+md_norm = [word.lower() for word in md if word.isalpha()] #Make every word lowercase
+
+md_tags = nltk.pos_tag(md_norm,tagset="universal")
+
+md_tags[:10]
+[('moby', 'NOUN'),
+ ('dick', 'NOUN'),
+ ('by', 'ADP'),
+ ('herman', 'NOUN'),
+ ('melville', 'NOUN'),
+ ('etymology', 'NOUN'),
+ ('supplied', 'VERB'),
+ ('by', 'ADP'),
+ ('a', 'DET'),
+ ('late', 'ADJ')]
+
+md_nouns = [word for word in md_tags if word[1] == "NOUN"]
+
+md_nouns[:10]
+[('moby', 'NOUN'),
+ ('dick', 'NOUN'),
+ ('herman', 'NOUN'),
+ ('melville', 'NOUN'),
+ ('etymology', 'NOUN'),
+ ('consumptive', 'NOUN'),
+ ('usher', 'NOUN'),
+ ('grammar', 'NOUN'),
+ ('school', 'NOUN'),
+ ('pale', 'NOUN')]
+
+nouns_fd = nltk.FreqDist(md_nouns)
+
+nouns_fd.most_common()[:10]
+[(('i', 'NOUN'), 1182),
+ (('whale', 'NOUN'), 909),
+ (('s', 'NOUN'), 774),
+ (('man', 'NOUN'), 527),
+ (('ship', 'NOUN'), 498),
+ (('sea', 'NOUN'), 435),
+ (('head', 'NOUN'), 337),
+ (('time', 'NOUN'), 334),
+ (('boat', 'NOUN'), 332),
+ (('ahab', 'NOUN'), 278)]
+
+%matplotlib inline
+import pandas as pd
+
+ #Put in Panda format
+data = pd.DataFrame(nouns_fd.most_common()) #Put in Panda format
+
+20
+data.columns = ["Noun", "Frequency"]
+data.head(20)
+Noun	Frequency
+0	(i, NOUN)	1182
+1	(whale, NOUN)	909
+2	(s, NOUN)	774
+3	(man, NOUN)	527
+4	(ship, NOUN)	498
+5	(sea, NOUN)	435
+6	(head, NOUN)	337
+7	(time, NOUN)	334
+8	(boat, NOUN)	332
+9	(ahab, NOUN)	278
+10	(captain, NOUN)	275
+11	(way, NOUN)	271
+12	(whales, NOUN)	256
+13	(men, NOUN)	244
+14	(ye, NOUN)	220
+15	(hand, NOUN)	214
+16	(side, NOUN)	197
+17	(water, NOUN)	190
+18	(deck, NOUN)	189
+19	(thing, NOUN)	188
+
+data[:10].plot("Noun", "Frequency")
+<matplotlib.axes._subplots.AxesSubplot at 0x7efd4c2d3358>
+
+
+​
