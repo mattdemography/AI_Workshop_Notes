@@ -1,0 +1,25 @@
+import nltk
+import re #Library for regular expressions
+
+book = nltk.corpus.gutenberg("carroll-alice.txt")
+print(book)
+print(len(book))
+
+book_sents = nltk.corpus.gutenberg.sents("carroll-alice.txt") #Breaking book up into sentences
+print(book_sents)
+
+for word in book:
+   print(word)
+
+book_FrequencyDistributation = nltk.FreqDist(book) #Gives frequency of words
+book_FrequencyDistributation
+#book_FrequencyDistributation.items()
+book_FrequencyDistributation.keys()
+
+book_FrequencyDistributation["size"]
+print(re.findall("[Ss][Ii]", "The (sIze. of the Size SIZE Simon si? oe of the book is small.")) #Regular expression
+
+book_FrequencyDistributation.most_common(15)
+
+#how about the words that occur once only, the so-called hapaxes
+book_FrequencyDistributation.hapaxes()[:15]
