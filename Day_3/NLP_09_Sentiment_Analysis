@@ -3,12 +3,14 @@ import csv
 import numpy as np
 
 negative = []
+#List of negative words
 with open('words_negative.csv', newline='') as file:
     reader = csv.reader(file)
     for row in reader:
         negative.append(row)
         
 positive = []
+#List of positive words
 with open("words_positive.csv", newline='') as file:
     reader = csv.reader(file)
     for row in reader:
