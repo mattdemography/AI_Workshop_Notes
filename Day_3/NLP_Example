@@ -1,0 +1,21 @@
+import pandas as pd
+import nltk
+nltk.download('averaged_perceptron_tagger')
+nltk.download('universal_tagset')
+md= nltk.corpus.gutenberg.words("melville-moby_dick.txt")
+
+md_norm=[word.lower() for word in md if word.isalpha()]
+md_tags= nltk.pos_tag(md_norm, tagset="universal")
+
+md_nouns=[word for word in md_tags if word[1] == "NOUN"]
+md_verbs=[word for word in md_tags if word[1] == "VERB"]
+md_adj=[word for word in md_tags if word[1] == "ADJ"]
+
+data= pd.DataFrame([["NOUN", len(md_nouns)],
+                   ["VERB", len(md_verbs)],
+                   ["ADJ", len(md_adj)]])
+                   
+data.columns=["POS", "Frequency"]
+
+%matplotlib inline #Creates plot in the line as opposed to sending it to a different window/file.
+data.plot.bar("POS", "Frequency")
