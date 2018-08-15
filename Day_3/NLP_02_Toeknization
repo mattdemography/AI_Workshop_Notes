@@ -1,0 +1,32 @@
+Tokenization
+
+import nltk
+
+my_string = "I am learning Natural Language Processing."
+
+tokens = nltk.word_tokenize(my_string)
+
+tokens
+['I', 'am', 'learning', 'Natural', 'Language', 'Processing', '.']
+
+len(tokens)
+7
+
+phrase = "Mr. Hill I am learning Natural Language Processing. I am learning how to tokenize! Mr. Hill help."
+
+tokens_sent = nltk.sent_tokenize(phrase)
+
+tokens_sent
+['Mr. Hill I am learning Natural Language Processing.',
+ 'I am learning how to tokenize!',
+ 'Mr. Hill help.']
+
+len(tokens_sent)
+3
+
+for item in tokens_sent:
+    print(nltk.word_tokenize(item))
+['I', 'am', 'learning', 'Natural', 'Language', 'Processing', '.']
+['I', 'am', 'learning', 'how', 'to', 'tokenize', '!']
+
+​
