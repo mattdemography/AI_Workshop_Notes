@@ -1,0 +1,88 @@
+import tweepy
+import csv
+import pandas as pd
+import numpy as np
+
+consumerKey='RXzVf0QoLzycPCzSyM672LYEr'
+consumerSecret='LXJ82qRr6i685209qfTcsRxgzHqYyFdW6O2ee81a9CCSBd3cOV'
+accessToken='839494478171947009-uMN3BaDGHRD0RQJPSMtSVVk49HQociR'
+accessTokenSecret='uudOqmoknxb1sjrKlTG4UOJIYY4j3OtJz8EUZXjk3kJYp'
+
+search_text = "@realDonaldTrump"
+search_number = 3000
+callCount = 0
+
+auth = tweepy.OAuthHandler(consumerKey, consumerSecret)
+auth.set_access_token(accessToken, accessTokenSecret)
+twitter = tweepy.API(auth)
+
+try:
+    allTweets = []
+    new_tweets = twitter.user_timeline(screen_name = search_text, count = search_number, include_rts = True, lang="en")
+    allTweets.extend(new_tweets)
+    #save the id of the oldest tweet less one
+    oldest = allTweets[-1].id - 1
+    #keep grabbing tweets until there are no tweets left to grab
+
+    while ((len(new_tweets) > 0) and (len(allTweets) < (int)(search_number))):
+        #all subsiquent requests use the max_id param to prevent duplicates
+        new_tweets = twitter.user_timeline(screen_name = search_text,count=200,max_id=oldest, lang="en")
+        #save most recent tweets
+        allTweets.extend(new_tweets)
+        #update the id of the oldest tweet less one
+        oldest = allTweets[-1].id - 1
+        print ("...%s tweets downloaded so far" % (len(allTweets)))
+        #transform the tweepy tweets into a 2D array that will populate the csv  
+except:
+    print("User Handle does not exist: "+search_text)
+    
+outTweets = [[tweet.id_str, tweet.created_at, tweet.text.encode("utf-8"), tweet.favorite_count, tweet.retweet_count ] for tweet in allTweets]
+
+df = pd.DataFrame(np.array(outTweets).reshape(len(outTweets),5), columns = ['Tweet ID', 'Date and Time', 'Tweet', 'Favorite Count', 'Retweet Count'])
+df
+
+df.to_pickle("Tweets.pkl") #*.pkl is an easy way to save data frame.
+
+import nltk
+nltk.download('stopwords') #Stop words are common words like 'the'.
+import string
+from nltk.corpus import stopwords
+stop_words = set(stopwords.words('english'))
+import pandas as pd
+
+def getListofWords(df): #Passing in Dataframe
+    wordlist = [] #Create empty word list.
+    for index, row in df.iterrows(): #Looping through every single row of dataframe.
+        tweet = row['Tweet'] #Assign current row, the 'Tweet' column in the data and call this tweet.
+        tweet = str(tweet)[2:-1].lower() #Cutting off first two letters and last quotation mark in tweet.
+        tweet = tweet.translate(str.maketrans('','',string.punctuation))
+        tweet_split = tweet.split(" ")
+        for each in tweet_split:
+            wordlist.append(each)
+    return wordlist
+    
+df = pd.read_pickle('Tweets.pkl')
+tweet_words = getListofWords(df)
+tweet_no_stop =  [w for w in tweet_words if not w in stop_words]
+
+word_freq = nltk.FreqDist(tweet_no_stop)
+del word_freq['rt']
+del word_freq['']
+del word_freq['amp']
+del word_freq['much']
+del word_freq['many']
+del word_freq['would']
+
+word_freq.most_common(25) #Show most commmon words
+bigrams = nltk.bigrams(tweet_no_stop) #Bi-grams are two word pairs
+word_freq = nltk.FreqDist(bigrams)
+
+trigrams = nltk.trigrams(tweet_no_stop) #Three word pairs
+word_freq = nltk.FreqDist(trigrams)
+
+from textblob import TextBlob #Sentiment Analysis package
+df['Tweet'] = df['Tweet'].str.decode("utf-8")
+
+df['Sentiment'] = df['Tweet'].apply(lambda tweet: TextBlob(tweet).sentiment[0])
+
+        
